@@ -2,8 +2,8 @@ import { Person, EventDetail, LoveStoryTimeline, BankAccount, GuestWish } from '
 
 export const WEDDING_DATA = {
   groom: {
-    name: 'Ikhsan',
-    fullName: 'Ikhsan Maulana',
+    name: 'Iksan',
+    fullName: 'Iksan Maulana',
     fatherName: 'Bpk. Muh Baris',
     motherName: 'Ibu Rahmatia',
     instagram: 'https://www.instagram.com/iksan_maul.1/?hl=en',
@@ -86,7 +86,7 @@ export const WEDDING_DATA = {
     {
       bankName: 'Bank BCA',
       accountNumber: '8400123456',
-      accountName: 'Ikhsan Maulana',
+      accountName: 'Iksan Maulana',
       logo: 'BCA'
     },
     {
@@ -98,7 +98,7 @@ export const WEDDING_DATA = {
   ] as BankAccount[],
 
   giftAddress: {
-    recipient: 'Ikhsan & Lala',
+    recipient: 'Iksan & Lala',
     phone: '0812-3456-7890',
     address: 'Jl. Bandungan No.10, Bandungan, Klangon, Kec. Saradan, Kabupaten Madiun, Jawa Timur 63155'
   },

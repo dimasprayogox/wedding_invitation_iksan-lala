@@ -133,7 +133,7 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ initialName = '' }) => {
               <label className="text-xs font-semibold uppercase tracking-wider text-amber-300">
                 Konfirmasi Kehadiran
               </label>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => setAttendance('hadir')}
@@ -164,26 +164,70 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ initialName = '' }) => {
               <div className="space-y-2">
                 <label className="text-xs font-semibold uppercase tracking-wider text-amber-300 flex items-center gap-2">
                   <Users className="w-4 h-4 text-amber-400" />
-                  Jumlah Tamu
+                  Jumlah Tamu Yang Hadir
                 </label>
+                
                 <select
-                  value={guestCount}
-                  onChange={(e) => setGuestCount(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white focus:outline-none focus:border-amber-400 text-sm transition-colors cursor-pointer"
+                  value={guestCount > 5 ? 'custom' : guestCount}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === 'custom') {
+                      setGuestCount(6);
+                    } else {
+                      setGuestCount(Number(val));
+                    }
+                  }}
+                  className="w-full px-4 py-3.5 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white focus:outline-none focus:border-amber-400 text-xs sm:text-sm transition-colors cursor-pointer"
                 >
-                  <option value={1} className="bg-zinc-950 text-white">1 Orang</option>
-                  <option value={2} className="bg-zinc-950 text-white">2 Orang</option>
-                  <option value={3} className="bg-zinc-950 text-white">3 Orang</option>
-                  <option value={4} className="bg-zinc-950 text-white">4 Orang</option>
+                  <option value={1} className="bg-zinc-950 text-white py-1">1 Orang</option>
+                  <option value={2} className="bg-zinc-950 text-white py-1">2 Orang</option>
+                  <option value={3} className="bg-zinc-950 text-white py-1">3 Orang</option>
+                  <option value={4} className="bg-zinc-950 text-white py-1">4 Orang</option>
+                  <option value={5} className="bg-zinc-950 text-white py-1">5 Orang</option>
+                  <option value="custom" className="bg-zinc-950 text-amber-300 py-1 font-semibold">Lainnya (Ketik Jumlah Manual)</option>
                 </select>
+
+                {/* Manual Input if 'custom' / > 5 selected */}
+                {guestCount > 5 && (
+                  <div className="flex items-center gap-3 pt-2">
+                    <span className="text-xs text-amber-200/80 font-medium">Jumlah Tamu:</span>
+                    <div className="flex items-center rounded-xl bg-zinc-950 border border-amber-500/40 p-1">
+                      <button
+                        type="button"
+                        onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
+                        className="w-8 h-8 rounded-lg bg-zinc-900 text-amber-300 flex items-center justify-center text-sm font-bold hover:bg-amber-400 hover:text-zinc-950 transition-colors cursor-pointer"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        min={1}
+                        max={100}
+                        value={guestCount}
+                        onChange={(e) => setGuestCount(Math.max(1, parseInt(e.target.value) || 1))}
+                        className="w-16 text-center bg-transparent text-white font-bold text-sm focus:outline-none"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setGuestCount(guestCount + 1)}
+                        className="w-8 h-8 rounded-lg bg-zinc-900 text-amber-300 flex items-center justify-center text-sm font-bold hover:bg-amber-400 hover:text-zinc-950 transition-colors cursor-pointer"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <span className="text-xs text-amber-200/80 font-medium">Orang</span>
+                  </div>
+                )}
               </div>
             )}
+
+
 
             {/* Additional Notes */}
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-wider text-amber-300 flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-amber-400" />
-                Pesan / Catatan Tambahan (Opsional)
+                Pesan (Opsional)
               </label>
               <textarea
                 rows={3}

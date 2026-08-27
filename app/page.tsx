@@ -14,7 +14,6 @@ import { WeddingGift } from '@/components/WeddingGift';
 import { RsvpForm } from '@/components/RsvpForm';
 import { GuestWishes } from '@/components/GuestWishes';
 import { MusicPlayer } from '@/components/MusicPlayer';
-import { ShareModal } from '@/components/ShareModal';
 import { BottomNav } from '@/components/BottomNav';
 import { FallingPetals } from '@/components/FallingPetals';
 import { WEDDING_DATA } from '@/data/weddingData';
@@ -65,8 +64,9 @@ function MainInvitationContent() {
               </h3>
               <p>Terima Kasih Atas Kehadiran &amp; Doa Restu Bapak/Ibu/Saudara/i</p>
               <p className="text-[10px] text-zinc-600">
-                Digital Wedding Invitation &copy; {new Date().getFullYear()}
+                Dimas Prayogo &copy; {new Date().getFullYear()} •{' '}
               </p>
+
             </footer>
           </main>
 
@@ -76,7 +76,6 @@ function MainInvitationContent() {
             onToggle={() => setIsPlayingMusic(!isPlayingMusic)}
             onStop={() => setIsPlayingMusic(false)}
           />
-          <ShareModal />
           <BottomNav />
         </>
       )}

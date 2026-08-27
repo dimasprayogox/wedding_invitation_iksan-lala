@@ -38,16 +38,19 @@ export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, o
 
         {/* Personalized Guest Box */}
         <div className="mt-8 p-6 sm:p-8 rounded-3xl glass-card border border-amber-500/35 backdrop-blur-xl shadow-[0_15px_40px_-15px_rgba(212,175,55,0.2)] relative hover:scale-[1.02] transition-transform">
-          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1 bg-gradient-to-r from-zinc-950 via-[#684b0f] to-zinc-950 border border-amber-400/50 rounded-full text-[10px] uppercase tracking-widest text-amber-200 shadow-lg">
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1 bg-gradient-to-r from-zinc-950 via-[#684b0f] to-zinc-950 border border-amber-400/50 rounded-full text-[10px] sm:text-xs uppercase tracking-widest text-amber-200 shadow-lg whitespace-nowrap">
             Kepada Yth. Bapak/Ibu/Saudara/i
           </div>
-          <h2 className="text-2xl sm:text-4xl font-semibold text-white mt-3 capitalize font-serif-custom drop-shadow">
+          <h2 className="text-2xl sm:text-4xl font-semibold text-white mt-2 capitalize font-serif-custom drop-shadow py-1">
             {guestName || 'Tamu Undangan'}
           </h2>
-          <p className="text-xs text-amber-200/75 mt-3 italic leading-relaxed font-light">
-            Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Hadir Di Acara Pernikahan Kami.
-          </p>
         </div>
+
+        {/* Invitation Message Below Guest Card */}
+        <p className="text-xs sm:text-sm text-amber-200/80 mt-4 px-2 italic leading-relaxed font-light max-w-sm sm:max-w-md mx-auto">
+          Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Hadir Di Acara Pernikahan Kami.
+        </p>
+
 
         {/* Open Button */}
         <button
