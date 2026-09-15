@@ -38,7 +38,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ isPlaying, onToggle, o
       <audio ref={audioRef} src={WEDDING_DATA.musicUrl} loop preload="auto" />
 
       {/* Fixed Floating Control Pod */}
-      <div className="fixed bottom-20 sm:bottom-8 right-6 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-[#FAF7F2]/90 backdrop-blur-xl border border-[#0B192C]/20 shadow-[0_10px_35px_rgba(11,25,44,0.15)] hover:border-[#0B192C]/40 transition-all duration-300">
+      <div className="fixed bottom-20 sm:bottom-8 right-6 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-[#F2F7FA]/90 backdrop-blur-xl border border-[#0B192C]/20 shadow-[0_10px_35px_rgba(11,25,44,0.15)] hover:border-[#0B192C]/40 transition-all duration-300">
         {/* Play / Pause Button */}
         <button
           onClick={onToggle}

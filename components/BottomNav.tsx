@@ -16,7 +16,7 @@ export const BottomNav: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 max-w-3xl w-[95%] sm:w-auto px-4 sm:px-6 py-2.5 rounded-full glass-card border border-[#0B192C]/20 bg-[#FAF7F2]/90 backdrop-blur-xl shadow-[0_10px_35px_rgba(11,25,44,0.15)]">
+    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 max-w-3xl w-[95%] sm:w-auto px-4 sm:px-6 py-2.5 rounded-full glass-card border border-[#0B192C]/20 bg-[#F2F7FA]/90 backdrop-blur-xl shadow-[0_10px_35px_rgba(11,25,44,0.15)]">
       <ul className="flex items-center justify-between gap-1 sm:gap-4 md:gap-5 text-slate-600">
         {navItems.map((item, idx) => {
           const Icon = item.icon;

@@ -30,7 +30,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: {
@@ -38,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className="scroll-smooth">
-      <body className={`${cinzel.variable} ${greatVibes.variable} ${plusJakartaSans.variable} font-sans bg-[#FAF7F2] text-[#0B192C] antialiased min-h-screen`}>
+      <body className={`${cinzel.variable} ${greatVibes.variable} ${plusJakartaSans.variable} font-sans bg-[#F2F7FA] text-[#162443] antialiased min-h-screen`}>
         {children}
       </body>
     </html>

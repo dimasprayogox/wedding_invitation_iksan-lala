@@ -9,7 +9,7 @@ export const EventDetails: React.FC = () => {
   const { akad, resepsi } = WEDDING_DATA.events;
 
   return (
-    <section id="event" className="py-24 px-6 bg-[#FAF7F2] text-[#0B192C] relative overflow-hidden border-t border-[#0B192C]/10">
+    <section id="event" className="py-24 px-6 bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] text-[#0B192C] relative overflow-hidden border-t border-[#0B192C]/10">
       {/* Background Floral Ornaments */}
       <FloralBackgroundLaurel />
       <div className="max-w-5xl mx-auto relative z-10">

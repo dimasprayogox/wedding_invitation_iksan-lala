@@ -9,7 +9,7 @@ export const MapsLocation: React.FC = () => {
   const { resepsi } = WEDDING_DATA.events;
 
   return (
-    <section id="location" className="py-24 px-6 bg-[#FAF7F2] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
+    <section id="location" className="py-24 px-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
       {/* Background Floral Ornaments */}
       <FloralBackgroundGeometric />
 

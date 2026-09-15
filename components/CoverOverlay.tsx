@@ -16,7 +16,7 @@ export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, o
   if (isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#FAF7F2] text-[#0B192C] p-4 sm:p-8 transition-all duration-1000 ease-in-out overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] p-4 sm:p-8 transition-all duration-1000 ease-in-out overflow-y-auto">
       {/* Mobile / Portrait Background Image */}
       <div className="block sm:hidden absolute inset-0 z-0 pointer-events-none">
         <Image

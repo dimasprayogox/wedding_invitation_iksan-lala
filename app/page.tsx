@@ -31,7 +31,7 @@ function MainInvitationContent() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FAF7F2] text-[#0B192C] selection:bg-[#1E3E62] selection:text-[#FAF7F2] font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] text-[#162443] selection:bg-[#4E6A91] selection:text-white font-sans overflow-x-hidden">
       {/* Cover Overlay Modal */}
       <CoverOverlay
         guestName={guestName}
@@ -57,13 +57,13 @@ function MainInvitationContent() {
             <GuestWishes initialGuestName={guestName} />
 
             {/* Footer */}
-            <footer className="py-12 px-6 bg-[#FAF7F2] border-t border-[#0B192C]/10 text-center space-y-4 text-xs text-slate-600 relative overflow-hidden">
+            <footer className="py-3 px-3 bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] border-t border-[#162443]/10 text-center space-y-2 text-xs text-[#4E6A91] relative overflow-hidden">
               <FloralDivider />
-              <h3 className="font-cursive text-4xl text-[#0B192C] drop-shadow-sm">
+              <h3 className="font-cursive text-4xl text-[#162443] drop-shadow-sm">
                 {WEDDING_DATA.groom.name} &amp; {WEDDING_DATA.bride.name}
               </h3>
-              <p className="text-slate-600">Terima Kasih Atas Kehadiran &amp; Doa Restu Bapak/Ibu/Saudara/i</p>
-              <p className="text-[10px] text-slate-400">
+              <p className="text-[#4E6A91]">Terima Kasih Atas Kehadiran &amp; Doa Restu Bapak/Ibu/Saudara/i</p>
+              <p className="text-[10px] text-[#94AAC6]">
                 Dimas Prayogo &copy; {new Date().getFullYear()}
               </p>
             </footer>
@@ -78,18 +78,19 @@ function MainInvitationContent() {
           <BottomNav />
         </>
       )}
-
     </div>
   );
 }
 
 export default function Home() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center text-[#0B192C] font-serif-custom">
-        Loading Wedding Invitation...
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] flex items-center justify-center text-[#162443] font-serif-custom">
+          Loading Wedding Invitation...
+        </div>
+      }
+    >
       <MainInvitationContent />
     </Suspense>
   );
