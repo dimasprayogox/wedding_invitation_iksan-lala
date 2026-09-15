@@ -5,6 +5,7 @@ import { MessageCircle, Send, User, Loader2 } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
 import { GuestWish } from '@/types/wedding';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { FloralBackgroundBotanical, FloralDivider } from '@/components/FloralDecorations';
 
 interface GuestWishesProps {
   initialGuestName?: string;
@@ -125,17 +126,20 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ initialGuestName = '' 
   };
 
   return (
-    <section id="wishes" className="py-24 px-6 bg-[#0a0a0d] text-amber-50 relative border-t border-amber-500/15 overflow-hidden">
+    <section id="wishes" className="py-24 px-6 bg-[#FAF7F2] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
+      {/* Background Floral Ornaments */}
+      <FloralBackgroundBotanical />
+
       <div className="max-w-4xl mx-auto space-y-12 relative z-10">
         <div className="text-center space-y-3">
-          <span className="text-xs uppercase tracking-[0.25em] text-amber-400 font-semibold">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#1E3E62] font-semibold">
             Buku Tamu &amp; Doa Restu
           </span>
-          <h2 className="font-serif-custom text-3xl sm:text-5xl text-amber-100 font-normal">
+          <h2 className="font-serif-custom text-3xl sm:text-5xl text-[#0B192C] font-normal">
             Ucapan &amp; Doa
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-2" />
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto leading-relaxed font-light">
+          <FloralDivider />
+          <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed font-light">
             Berikan ucapan hangat dan doa terbaik Anda untuk kedua mempelai.
           </p>
         </div>
@@ -143,59 +147,59 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ initialGuestName = '' 
         {/* Input Form Card */}
         <form
           onSubmit={handleAddWish}
-          className="p-6 sm:p-8 rounded-3xl glass-card border border-amber-500/30 shadow-2xl space-y-5"
+          className="p-6 sm:p-8 rounded-3xl glass-card border border-[#0B192C]/15 shadow-xl space-y-5"
         >
           {errorMessage && (
-            <div className="p-4 rounded-xl bg-amber-950/60 border border-amber-500/40 text-amber-200 text-xs text-center">
+            <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs text-center">
               {errorMessage}
             </div>
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-amber-300 uppercase tracking-wider">Nama Anda</label>
+              <label className="text-xs font-semibold text-[#1E3E62] uppercase tracking-wider">Nama Anda</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Masukkan nama lengkap..."
-                className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-amber-400"
+                className="w-full px-4 py-3 rounded-xl bg-[#FFFDF9] border border-[#0B192C]/20 text-[#0B192C] placeholder-slate-400 text-xs focus:outline-none focus:border-[#0B192C]"
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-amber-300 uppercase tracking-wider">Hubungan / Sebagai</label>
+              <label className="text-xs font-semibold text-[#1E3E62] uppercase tracking-wider">Hubungan / Sebagai</label>
               <input
                 type="text"
                 value={relation}
                 onChange={(e) => setRelation(e.target.value)}
                 placeholder="Contoh: Teman SMA, Rekan Kerja, Saudara..."
-                className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-amber-400"
+                className="w-full px-4 py-3 rounded-xl bg-[#FFFDF9] border border-[#0B192C]/20 text-[#0B192C] placeholder-slate-400 text-xs focus:outline-none focus:border-[#0B192C]"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-amber-300 uppercase tracking-wider">Ucapan &amp; Doa Restu</label>
+            <label className="text-xs font-semibold text-[#1E3E62] uppercase tracking-wider">Ucapan &amp; Doa Restu</label>
             <textarea
               rows={3}
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Tuliskan ucapan dan doa terbaik..."
-              className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-amber-400"
+              className="w-full px-4 py-3 rounded-xl bg-[#FFFDF9] border border-[#0B192C]/20 text-[#0B192C] placeholder-slate-400 text-xs focus:outline-none focus:border-[#0B192C]"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 rounded-full shimmer-button text-zinc-950 font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-amber-500/30 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 rounded-full shimmer-button text-[#FAF7F2] font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-[#0B192C]/20 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isSubmitting ? (
-              <Loader2 className="w-4 h-4 animate-spin text-zinc-950" />
+              <Loader2 className="w-4 h-4 animate-spin text-[#FAF7F2]" />
             ) : (
-              <Send className="w-4 h-4 text-zinc-950" />
+              <Send className="w-4 h-4 text-[#FAF7F2]" />
             )}
             <span>{isSubmitting ? 'Mengirim...' : 'Kirim Ucapan'}</span>
           </button>
@@ -203,37 +207,37 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ initialGuestName = '' 
 
         {/* Wishes List */}
         <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-          <div className="flex items-center gap-2 text-xs font-semibold text-amber-300 uppercase tracking-widest pb-2">
-            <MessageCircle className="w-4 h-4 text-amber-400" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#1E3E62] uppercase tracking-widest pb-2">
+            <MessageCircle className="w-4 h-4 text-[#1E3E62]" />
             <span>{wishes.length} Ucapan Terkirim</span>
           </div>
 
           {wishes.map((item) => (
             <div
               key={item.id}
-              className="p-5 rounded-2xl glass-card border border-amber-500/25 space-y-2 hover:border-amber-400/60 transition-colors shadow-lg"
+              className="p-5 rounded-2xl glass-card border border-[#0B192C]/15 space-y-2 hover:border-[#0B192C]/30 transition-colors shadow-md"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-zinc-950 border border-amber-400/40 flex items-center justify-center text-amber-400 shadow-md">
+                  <div className="w-9 h-9 rounded-full bg-[#FFFDF9] border border-[#0B192C]/20 flex items-center justify-center text-[#1E3E62] shadow-sm">
                     <User className="w-4 h-4" />
                   </div>
                   <div>
-                    <strong className="text-sm font-semibold text-amber-100 block">
+                    <strong className="text-sm font-semibold text-[#0B192C] block">
                       {item.name}
                     </strong>
-                    <span className="text-[11px] text-amber-300/80 font-medium">
+                    <span className="text-[11px] text-[#1E3E62] font-medium">
                       {item.relation}
                     </span>
                   </div>
                 </div>
 
-                <span className="text-[10px] text-zinc-400 font-mono">
+                <span className="text-[10px] text-slate-400 font-mono">
                   {item.createdAt}
                 </span>
               </div>
 
-              <p className="text-xs text-zinc-300 leading-relaxed pt-1 pl-12 font-light">
+              <p className="text-xs text-slate-700 leading-relaxed pt-1 pl-12 font-light">
                 &ldquo;{item.message}&rdquo;
               </p>
             </div>
@@ -243,4 +247,3 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ initialGuestName = '' 
     </section>
   );
 };
-

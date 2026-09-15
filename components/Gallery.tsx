@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
+import { FloralBackgroundMeadow, FloralDivider } from '@/components/FloralDecorations';
 
 export const Gallery: React.FC = () => {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
@@ -24,16 +25,19 @@ export const Gallery: React.FC = () => {
   };
 
   return (
-    <section id="gallery" className="py-24 px-6 bg-[#070709] text-amber-50 relative border-t border-amber-500/15 overflow-hidden">
+    <section id="gallery" className="py-24 px-6 bg-[#FAF7F2] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
+      {/* Background Floral Ornaments */}
+      <FloralBackgroundMeadow />
+
       <div className="max-w-6xl mx-auto space-y-12 relative z-10">
         <div className="text-center space-y-3">
-          <span className="text-xs uppercase tracking-[0.25em] text-amber-400 font-semibold">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#1E3E62] font-semibold">
             Galeri Foto
           </span>
-          <h2 className="font-serif-custom text-3xl sm:text-5xl text-amber-100 font-normal">
+          <h2 className="font-serif-custom text-3xl sm:text-5xl text-[#0B192C] font-normal">
             Momen Bahagia
           </h2>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-2" />
+          <FloralDivider />
         </div>
 
         {/* Gallery Grid */}
@@ -42,7 +46,7 @@ export const Gallery: React.FC = () => {
             <div
               key={img.id}
               onClick={() => openLightbox(idx)}
-              className="group relative h-48 sm:h-72 rounded-2xl overflow-hidden cursor-pointer border border-amber-500/30 shadow-xl hover:border-amber-400 hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] transition-all duration-500"
+              className="group relative h-48 sm:h-72 rounded-2xl overflow-hidden cursor-pointer border border-[#0B192C]/15 shadow-md hover:border-[#0B192C]/40 hover:shadow-xl transition-all duration-500"
             >
               <Image
                 src={img.url}
@@ -51,9 +55,9 @@ export const Gallery: React.FC = () => {
                 sizes="(max-width: 640px) 50vw, 33vw"
                 className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <span className="text-xs text-amber-300 font-medium inline-flex items-center gap-1.5 uppercase tracking-wider">
-                  <Maximize2 className="w-3.5 h-3.5 text-amber-400" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B192C]/90 via-[#0B192C]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span className="text-xs text-[#FAF7F2] font-medium inline-flex items-center gap-1.5 uppercase tracking-wider">
+                  <Maximize2 className="w-3.5 h-3.5 text-[#FAF7F2]" />
                   Lihat Foto
                 </span>
               </div>
@@ -64,30 +68,30 @@ export const Gallery: React.FC = () => {
 
       {/* Lightbox Modal */}
       {activeImageIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#0B192C]/95 backdrop-blur-md flex items-center justify-center p-4">
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 p-3 rounded-full bg-zinc-900 border border-amber-500/30 text-amber-300 hover:bg-amber-400 hover:text-zinc-950 transition-colors cursor-pointer z-50 shadow-lg"
+            className="absolute top-6 right-6 p-3 rounded-full bg-[#1E3E62] border border-[#FAF7F2]/20 text-[#FAF7F2] hover:bg-[#FAF7F2] hover:text-[#0B192C] transition-colors cursor-pointer z-50 shadow-lg"
           >
             <X className="w-6 h-6" />
           </button>
 
           <button
             onClick={prevImage}
-            className="absolute left-4 sm:left-8 p-3 rounded-full bg-zinc-900 border border-amber-500/30 text-amber-300 hover:bg-amber-400 hover:text-zinc-950 transition-colors cursor-pointer z-50 shadow-lg"
+            className="absolute left-4 sm:left-8 p-3 rounded-full bg-[#1E3E62] border border-[#FAF7F2]/20 text-[#FAF7F2] hover:bg-[#FAF7F2] hover:text-[#0B192C] transition-colors cursor-pointer z-50 shadow-lg"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             onClick={nextImage}
-            className="absolute right-4 sm:right-8 p-3 rounded-full bg-zinc-900 border border-amber-500/30 text-amber-300 hover:bg-amber-400 hover:text-zinc-950 transition-colors cursor-pointer z-50 shadow-lg"
+            className="absolute right-4 sm:right-8 p-3 rounded-full bg-[#1E3E62] border border-[#FAF7F2]/20 text-[#FAF7F2] hover:bg-[#FAF7F2] hover:text-[#0B192C] transition-colors cursor-pointer z-50 shadow-lg"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
           <div className="relative max-w-4xl max-h-[85vh] w-full h-full flex flex-col items-center justify-center p-2">
-            <div className="relative w-full h-[75vh] rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl">
+            <div className="relative w-full h-[75vh] rounded-2xl overflow-hidden border border-[#FAF7F2]/20 shadow-2xl">
               <Image
                 src={WEDDING_DATA.gallery[activeImageIndex].url}
                 alt={WEDDING_DATA.gallery[activeImageIndex].title}
@@ -95,7 +99,7 @@ export const Gallery: React.FC = () => {
                 className="object-contain"
               />
             </div>
-            <p className="mt-4 text-xs text-amber-300 uppercase tracking-[0.2em] font-medium">
+            <p className="mt-4 text-xs text-[#FAF7F2] uppercase tracking-[0.2em] font-medium">
               {activeImageIndex + 1} / {WEDDING_DATA.gallery.length} — {WEDDING_DATA.gallery[activeImageIndex].title}
             </p>
           </div>
@@ -104,4 +108,3 @@ export const Gallery: React.FC = () => {
     </section>
   );
 };
-

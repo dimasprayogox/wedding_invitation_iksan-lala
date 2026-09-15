@@ -36,7 +36,7 @@ export const WEDDING_DATA = {
       time: '08.30 WIB',
       timezone: 'WIB',
       venue: 'Kediaman Mempelai Wanita',
-      address: 'Jl. Bandungan No.10, Bandungan, Klangon, Kec. Saradan, Kabupaten Madiun, Jawa Timur 63155',
+      address: 'RT. 22/RW. 04, Dusun Bandungan, Desa Klangon, Kec. Saradan, Kabupaten Madiun, Jawa Timur',
       mapsUrl: 'https://www.google.com/maps?q=-7.4773832,111.8128071',
       embedMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d494.48626663071957!2d111.81280713199455!3d-7.477383209436525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79cb7e2f3f711d%3A0x8830304c75b6e3b8!2sJl.%20Bandungan%20No.10%2C%20Bandungan%2C%20Klangon%2C%20Kec.%20Saradan%2C%20Kabupaten%20Madiun%2C%20Jawa%20Timur%2063155!5e0!3m2!1sid!2sid!4v1787805199057!5m2!1sid!2sid'
     } as EventDetail,
@@ -46,32 +46,11 @@ export const WEDDING_DATA = {
       time: '13.00 WIB',
       timezone: 'WIB',
       venue: 'Kediaman Mempelai Wanita',
-      address: 'Jl. Bandungan No.10, Bandungan, Klangon, Kec. Saradan, Kabupaten Madiun, Jawa Timur 63155',
+      address: 'RT. 22/RW. 04, Dusun Bandungan, Desa Klangon, Kec. Saradan, Kabupaten Madiun, Jawa Timur',
       mapsUrl: 'https://www.google.com/maps?q=-7.4773832,111.8128071',
       embedMapsUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d494.48626663071957!2d111.81280713199455!3d-7.477383209436525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79cb7e2f3f711d%3A0x8830304c75b6e3b8!2sJl.%20Bandungan%20No.10%2C%20Bandungan%2C%20Klangon%2C%20Kec.%20Saradan%2C%20Kabupaten%20Madiun%2C%20Jawa%20Timur%2063155!5e0!3m2!1sid!2sid!4v1787805199057!5m2!1sid!2sid'
     } as EventDetail
   },
-
-  loveStory: [
-    {
-      year: '2021',
-      title: 'Pertama Kali Bertemu',
-      description: 'Kami pertama kali bertegur sapa saat menghadiri seminar teknologi di Bandung. Sebuah percakapan singkat yang membuka awal cerita manis.',
-      image: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=500'
-    },
-    {
-      year: '2023',
-      title: 'Komitmen Bersama',
-      description: 'Setelah 2 tahun mengenal satu sama lain, kami memutuskan untuk melangkah ke jenjang yang lebih serius dan saling mendukung impian masing-masing.',
-      image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=500'
-    },
-    {
-      year: '2025',
-      title: 'Hari Lamaran',
-      description: 'Di hadapan kedua keluarga besar, kami mengikrarkan niat tulus untuk menyatukan dua keluarga dalam ikatan pernikahan yang suci.',
-      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=500'
-    }
-  ] as LoveStoryTimeline[],
 
   gallery: [
     { id: 1, title: 'Prewedding Moment 1', url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800' },
@@ -84,14 +63,14 @@ export const WEDDING_DATA = {
 
   bankAccounts: [
     {
-      bankName: 'Bank BCA',
-      accountNumber: '8400123456',
+      bankName: 'Bank BRI',
+      accountNumber: '768601082823530',
       accountName: 'Iksan Maulana',
-      logo: 'BCA'
+      logo: 'BRI'
     },
     {
       bankName: 'Bank Mandiri',
-      accountNumber: '1310019876543',
+      accountNumber: '1710013583466',
       accountName: 'Lala Permatasari',
       logo: 'MANDIRI'
     }

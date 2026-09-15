@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className="scroll-smooth">
-      <body className={`${cinzel.variable} ${greatVibes.variable} ${plusJakartaSans.variable} font-sans bg-zinc-950 text-amber-50 antialiased min-h-screen`}>
+      <body className={`${cinzel.variable} ${greatVibes.variable} ${plusJakartaSans.variable} font-sans bg-[#FAF7F2] text-[#0B192C] antialiased min-h-screen`}>
         {children}
       </body>
     </html>

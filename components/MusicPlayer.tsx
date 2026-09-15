@@ -38,25 +38,25 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ isPlaying, onToggle, o
       <audio ref={audioRef} src={WEDDING_DATA.musicUrl} loop preload="auto" />
 
       {/* Fixed Floating Control Pod */}
-      <div className="fixed bottom-20 sm:bottom-8 right-6 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-zinc-950/90 backdrop-blur-xl border border-amber-500/40 shadow-[0_10px_35px_rgba(0,0,0,0.9)] hover:border-amber-400/60 transition-all duration-300">
+      <div className="fixed bottom-20 sm:bottom-8 right-6 z-50 flex items-center gap-1.5 p-1.5 rounded-full bg-[#FAF7F2]/90 backdrop-blur-xl border border-[#0B192C]/20 shadow-[0_10px_35px_rgba(11,25,44,0.15)] hover:border-[#0B192C]/40 transition-all duration-300">
         {/* Play / Pause Button */}
         <button
           onClick={onToggle}
           title={isPlaying ? 'Jeda Musik (Pause)' : 'Putar Musik (Play)'}
           className={`p-3 rounded-full transition-all duration-300 cursor-pointer ${
             isPlaying
-              ? 'shimmer-button text-zinc-950 border-amber-300 shadow-[0_0_20px_rgba(212,175,55,0.5)] scale-105'
-              : 'bg-zinc-900 text-amber-400 border border-amber-500/30 hover:border-amber-300 hover:text-amber-200'
+              ? 'shimmer-button text-[#FAF7F2] border-[#0B192C] shadow-[0_0_20px_rgba(11,25,44,0.3)] scale-105'
+              : 'bg-[#FFFDF9] text-[#1E3E62] border border-[#0B192C]/20 hover:border-[#0B192C] hover:text-[#0B192C]'
           }`}
         >
           <div className="relative flex items-center justify-center">
             {isPlaying ? (
               <>
-                <Pause className="w-4 h-4 text-zinc-950" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-200 animate-ping" />
+                <Pause className="w-4 h-4 text-[#FAF7F2]" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#FAF7F2] animate-ping" />
               </>
             ) : (
-              <Play className="w-4 h-4 ml-0.5 text-amber-400" />
+              <Play className="w-4 h-4 ml-0.5 text-[#1E3E62]" />
             )}
           </div>
         </button>
@@ -65,7 +65,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ isPlaying, onToggle, o
         <button
           onClick={handleStop}
           title="Hentikan Musik (Stop & Reset)"
-          className="p-3 rounded-full bg-zinc-900 text-amber-400/80 border border-amber-500/30 hover:border-amber-400 hover:text-amber-300 hover:bg-zinc-800 transition-all duration-300 cursor-pointer"
+          className="p-3 rounded-full bg-[#FFFDF9] text-[#1E3E62] border border-[#0B192C]/20 hover:border-[#0B192C] hover:text-[#0B192C] hover:bg-[#F4EFE6] transition-all duration-300 cursor-pointer"
         >
           <Square className="w-4 h-4 fill-current" />
         </button>
@@ -73,6 +73,3 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ isPlaying, onToggle, o
     </>
   );
 };
-
-
-
