@@ -9,7 +9,6 @@ import {
   Send,
   CheckCircle2,
   XCircle,
-  Users,
   MessageCircle,
   Search,
   RefreshCw,
@@ -124,15 +123,16 @@ export default function AdminPage() {
     }
   };
 
-
-  // Auth Handler
+  // Auth Handler using process.env credentials
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
 
-    // Static Credentials: admin / admin OR iksanlala / wedding2026
+    const envUsername = (process.env.NEXT_PUBLIC_ADMIN_USERNAME || process.env.ADMIN_USERNAME || 'admin').trim();
+    const envPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || 'password').trim();
+
     if (
-      (username.trim() === 'admin' && password.trim() === 'password') ||
+      (username.trim() === envUsername && password.trim() === envPassword) ||
       (username.trim() === 'iksanlala' && password.trim() === 'wedding2026')
     ) {
       setIsAuthenticated(true);
@@ -296,7 +296,6 @@ export default function AdminPage() {
     }
   };
 
-
   // Copy helper
   const copyToClipboard = (text: string, idKey: string) => {
     navigator.clipboard.writeText(text);
@@ -350,7 +349,6 @@ export default function AdminPage() {
     saveGuestLinkToLocal(newSavedLink);
     setGuestNameInput('');
   };
-
 
   // CSV Exporters
   const exportRsvpCsv = () => {
@@ -413,90 +411,89 @@ export default function AdminPage() {
       w.message.toLowerCase().includes(wishSearch.toLowerCase())
   );
 
-  // LOGIN SCREEN
+  // LOGIN SCREEN (Matching Landing Page Palette)
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-b from-[#070709] via-zinc-950 to-[#0a0a0d] text-amber-50 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] relative overflow-hidden">
         {/* Background Glow */}
-        <div className="absolute w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none -top-20 -left-20" />
-        <div className="absolute w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-3xl pointer-events-none -bottom-20 -right-20" />
+        <div className="absolute w-[500px] h-[500px] bg-[#1E3E62]/10 rounded-full blur-3xl pointer-events-none -top-20 -left-20" />
+        <div className="absolute w-[500px] h-[500px] bg-[#1E3E62]/10 rounded-full blur-3xl pointer-events-none -bottom-20 -right-20" />
 
-        <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl glass-card border border-amber-500/35 shadow-[0_20px_50px_rgba(0,0,0,0.9)] relative z-10 space-y-6">
+        <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl glass-card border border-[#0B192C]/20 shadow-2xl relative z-10 space-y-6">
           <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-zinc-950 border border-amber-400/50 flex items-center justify-center mx-auto text-amber-400 shadow-xl">
+            <div className="w-14 h-14 rounded-2xl bg-[#162443] flex items-center justify-center mx-auto text-[#FAF7F2] shadow-xl">
               <ShieldCheck className="w-7 h-7" />
             </div>
-            <h1 className="font-serif-custom text-2xl sm:text-3xl font-semibold gold-gradient-text pt-2">
+            <h1 className="font-serif-custom text-2xl sm:text-3xl font-semibold navy-gradient-text pt-2">
               Dashboard Admin
             </h1>
-            <p className="text-xs text-amber-200/80 uppercase tracking-widest font-medium">
+            <p className="text-xs text-[#1E3E62] uppercase tracking-widest font-semibold">
               The Wedding Of {WEDDING_DATA.groom.name} &amp; {WEDDING_DATA.bride.name}
             </p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4 pt-2">
             {loginError && (
-              <div className="p-3.5 rounded-xl bg-red-950/80 border border-red-500/40 text-red-200 text-xs text-center">
+              <div className="p-3.5 rounded-xl bg-rose-100 border border-rose-300 text-rose-700 text-xs text-center font-medium">
                 {loginError}
               </div>
             )}
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold uppercase tracking-wider text-amber-300">Username</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-[#1E3E62]">Username</label>
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Masukkan username..."
-                className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-amber-400 transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-white/90 border border-[#0B192C]/20 text-[#0B192C] placeholder-slate-400 text-sm focus:outline-none focus:border-[#162443] focus:ring-1 focus:ring-[#162443] transition-colors"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold uppercase tracking-wider text-amber-300">Password</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-[#1E3E62]">Password</label>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Masukkan password..."
-                className="w-full px-4 py-3 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-amber-400 transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-white/90 border border-[#0B192C]/20 text-[#0B192C] placeholder-slate-400 text-sm focus:outline-none focus:border-[#162443] focus:ring-1 focus:ring-[#162443] transition-colors"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-full shimmer-button text-zinc-950 font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-amber-500/30 hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
+              className="w-full py-3.5 rounded-full shimmer-button text-[#FAF7F2] font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-[#0B192C]/20 hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
             >
-              <Lock className="w-4 h-4 text-zinc-950" />
+              <Lock className="w-4 h-4 text-[#FAF7F2]" />
               <span>Masuk Dashboard</span>
             </button>
           </form>
-
         </div>
       </div>
     );
   }
 
-  // MAIN DASHBOARD SCREEN
+  // MAIN DASHBOARD SCREEN (Matching Landing Page Palette)
   return (
-    <div className="min-h-screen bg-[#070709] text-amber-50 relative pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] text-[#0B192C] relative pb-20 overflow-x-hidden">
       {/* Top Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-amber-500/15 via-amber-600/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-[#1E3E62]/10 via-[#1E3E62]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       {/* Header Bar */}
-      <header className="sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-amber-500/25 px-6 py-4">
+      <header className="sticky top-0 z-40 bg-[#F2F7FA]/90 backdrop-blur-xl border-b border-[#0B192C]/15 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#aa771c] to-[#f3e5ab] flex items-center justify-center text-zinc-950 font-bold shadow-lg">
-              <Heart className="w-5 h-5 fill-zinc-950 text-zinc-950" />
+            <div className="w-10 h-10 rounded-xl bg-[#162443] flex items-center justify-center text-[#FAF7F2] font-bold shadow-md">
+              <Heart className="w-5 h-5 fill-[#FAF7F2] text-[#FAF7F2]" />
             </div>
             <div>
-              <h1 className="font-serif-custom text-lg sm:text-xl font-bold gold-gradient-text leading-tight">
+              <h1 className="font-serif-custom text-lg sm:text-xl font-bold navy-gradient-text leading-tight">
                 {WEDDING_DATA.groom.name} &amp; {WEDDING_DATA.bride.name}
               </h1>
-              <p className="text-[10px] text-amber-300/80 uppercase tracking-widest font-semibold">
+              <p className="text-[10px] text-[#1E3E62] uppercase tracking-widest font-semibold">
                 Admin &amp; Management Portal
               </p>
             </div>
@@ -507,17 +504,17 @@ export default function AdminPage() {
               href="/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-amber-500/30 text-xs text-amber-300 hover:border-amber-400 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-[#0B192C]/20 text-xs text-[#1E3E62] hover:border-[#162443] transition-colors shadow-sm"
             >
               <span>Lihat Website</span>
-              <ExternalLink className="w-3 h-3 text-amber-400" />
+              <ExternalLink className="w-3 h-3 text-[#162443]" />
             </a>
 
             <button
               onClick={handleLogout}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-red-950/60 border border-red-500/40 text-xs text-red-200 hover:bg-red-900 transition-colors cursor-pointer font-semibold shadow-md"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-xs text-rose-700 hover:bg-rose-100 transition-colors cursor-pointer font-semibold shadow-sm"
             >
-              <LogOut className="w-3.5 h-3.5 text-red-300" />
+              <LogOut className="w-3.5 h-3.5 text-rose-600" />
               <span>Keluar</span>
             </button>
           </div>
@@ -527,13 +524,13 @@ export default function AdminPage() {
       {/* Main Container */}
       <main className="max-w-6xl mx-auto px-6 pt-8 space-y-8 relative z-10">
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-zinc-950 border border-amber-500/30 shadow-xl overflow-x-auto">
+        <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/80 border border-[#0B192C]/15 shadow-md overflow-x-auto backdrop-blur-md">
           <button
             onClick={() => setActiveTab('share')}
             className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'share'
-                ? 'shimmer-button text-zinc-950 font-extrabold shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-amber-200 hover:bg-zinc-900'
+                ? 'shimmer-button text-[#FAF7F2] font-extrabold shadow-md shadow-[#0B192C]/20'
+                : 'text-[#1E3E62] hover:text-[#0B192C] hover:bg-[#1E3E62]/10'
             }`}
           >
             <Share2 className="w-4 h-4" />
@@ -544,8 +541,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab('rsvp')}
             className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'rsvp'
-                ? 'shimmer-button text-zinc-950 font-extrabold shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-amber-200 hover:bg-zinc-900'
+                ? 'shimmer-button text-[#FAF7F2] font-extrabold shadow-md shadow-[#0B192C]/20'
+                : 'text-[#1E3E62] hover:text-[#0B192C] hover:bg-[#1E3E62]/10'
             }`}
           >
             <UserCheck className="w-4 h-4" />
@@ -556,8 +553,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab('wishes')}
             className={`flex-1 min-w-[140px] py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'wishes'
-                ? 'shimmer-button text-zinc-950 font-extrabold shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-amber-200 hover:bg-zinc-900'
+                ? 'shimmer-button text-[#FAF7F2] font-extrabold shadow-md shadow-[#0B192C]/20'
+                : 'text-[#1E3E62] hover:text-[#0B192C] hover:bg-[#1E3E62]/10'
             }`}
           >
             <MessageCircle className="w-4 h-4" />
@@ -569,23 +566,23 @@ export default function AdminPage() {
         {activeTab === 'share' && (
           <div className="space-y-8 animate-fade-in-up">
             {/* Generator Card */}
-            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-amber-500/35 shadow-2xl space-y-6">
-              <div className="flex items-center justify-between flex-wrap gap-4 border-b border-amber-500/20 pb-4">
+            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-[#0B192C]/15 shadow-xl space-y-6">
+              <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#0B192C]/10 pb-4">
                 <div>
-                  <h2 className="font-serif-custom text-xl sm:text-2xl font-bold gold-gradient-text">
+                  <h2 className="font-serif-custom text-xl sm:text-2xl font-bold navy-gradient-text">
                     Generator Link Tamu Undangan
                   </h2>
-                  <p className="text-xs text-zinc-400 mt-1">
+                  <p className="text-xs text-slate-600 mt-1">
                     Buat link khusus dengan nama tamu untuk dikirim via WhatsApp atau media sosial.
                   </p>
                 </div>
-                <div className="flex items-center gap-2 bg-zinc-950 p-1 rounded-xl border border-amber-500/30">
+                <div className="flex items-center gap-2 bg-white p-1 rounded-xl border border-[#0B192C]/15 shadow-sm">
                   <button
                     onClick={() => setMessageTemplate('formal')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                       messageTemplate === 'formal'
-                        ? 'bg-amber-400 text-zinc-950 font-bold'
-                        : 'text-zinc-400 hover:text-amber-200'
+                        ? 'shimmer-button text-[#FAF7F2] font-bold'
+                        : 'text-[#1E3E62] hover:text-[#0B192C]'
                     }`}
                   >
                     Format Formal
@@ -594,8 +591,8 @@ export default function AdminPage() {
                     onClick={() => setMessageTemplate('santai')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                       messageTemplate === 'santai'
-                        ? 'bg-amber-400 text-zinc-950 font-bold'
-                        : 'text-zinc-400 hover:text-amber-200'
+                        ? 'shimmer-button text-[#FAF7F2] font-bold'
+                        : 'text-[#1E3E62] hover:text-[#0B192C]'
                     }`}
                   >
                     Format Santai
@@ -605,7 +602,7 @@ export default function AdminPage() {
 
               <form onSubmit={handleGenerateLink} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-amber-300">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-[#1E3E62]">
                     Nama Tamu Undangan
                   </label>
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -615,13 +612,13 @@ export default function AdminPage() {
                       value={guestNameInput}
                       onChange={(e) => setGuestNameInput(e.target.value)}
                       placeholder="Masukkan nama (Contoh: Bapak Ahmad / Sahabat Budi &amp; Pasangan)..."
-                      className="flex-1 px-4 py-3.5 rounded-xl bg-zinc-950/90 border border-amber-500/30 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-amber-400"
+                      className="flex-1 px-4 py-3.5 rounded-xl bg-white/90 border border-[#0B192C]/20 text-[#0B192C] placeholder-slate-400 text-sm focus:outline-none focus:border-[#162443]"
                     />
                     <button
                       type="submit"
-                      className="px-6 py-3.5 rounded-xl shimmer-button text-zinc-950 font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/30 hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap"
+                      className="px-6 py-3.5 rounded-xl shimmer-button text-[#FAF7F2] font-extrabold text-xs uppercase tracking-wider shadow-md shadow-[#0B192C]/20 hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap"
                     >
-                      <Plus className="w-4 h-4 text-zinc-950" />
+                      <Plus className="w-4 h-4 text-[#FAF7F2]" />
                       <span>Buat Link Tamu</span>
                     </button>
                   </div>
@@ -630,11 +627,11 @@ export default function AdminPage() {
 
               {/* Quick Preview Box if input has value */}
               {guestNameInput.trim() && (
-                <div className="p-4 rounded-2xl bg-zinc-950/80 border border-amber-400/40 space-y-3">
-                  <span className="text-[10px] uppercase tracking-widest text-amber-400 font-bold block">
+                <div className="p-4 rounded-2xl bg-white/90 border border-[#0B192C]/15 space-y-3 shadow-sm">
+                  <span className="text-[10px] uppercase tracking-widest text-[#162443] font-bold block">
                     Live Preview Pesan WhatsApp:
                   </span>
-                  <div className="text-xs text-zinc-300 bg-zinc-900/90 p-3.5 rounded-xl whitespace-pre-wrap font-mono leading-relaxed border border-amber-500/20">
+                  <div className="text-xs text-slate-700 bg-[#F2F7FA] p-3.5 rounded-xl whitespace-pre-wrap font-mono leading-relaxed border border-[#0B192C]/10">
                     {getWhatsAppMessage(
                       guestNameInput.trim(),
                       `${baseUrl || 'https://wedding.app'}?to=${encodeURIComponent(guestNameInput.trim())}`
@@ -645,16 +642,16 @@ export default function AdminPage() {
             </div>
 
             {/* Saved Links Table */}
-            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-amber-500/30 shadow-2xl space-y-6">
-              <div className="flex items-center justify-between border-b border-amber-500/20 pb-4">
-                <h3 className="font-serif-custom text-lg font-bold text-amber-100 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
+            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-[#0B192C]/15 shadow-xl space-y-6">
+              <div className="flex items-center justify-between border-b border-[#0B192C]/10 pb-4">
+                <h3 className="font-serif-custom text-lg font-bold text-[#0B192C] flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#1E3E62]" />
                   Daftar Link Tamu Yang Pernah Dibuat ({savedLinks.length})
                 </h3>
               </div>
 
               {savedLinks.length === 0 ? (
-                <div className="text-center py-10 text-zinc-500 text-xs italic">
+                <div className="text-center py-10 text-slate-500 text-xs italic">
                   Belum ada link tamu yang disimpan. Ketikkan nama tamu di atas untuk membuat link kustom.
                 </div>
               ) : (
@@ -666,14 +663,14 @@ export default function AdminPage() {
                     return (
                       <div
                         key={item.id}
-                        className="p-4 rounded-2xl bg-zinc-950/80 border border-amber-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-amber-400/60 transition-colors shadow-md"
+                        className="p-4 rounded-2xl bg-white/90 border border-[#0B192C]/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#162443]/40 transition-colors shadow-sm"
                       >
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <strong className="text-sm font-semibold text-amber-100">
+                            <strong className="text-sm font-semibold text-[#0B192C]">
                               {item.guestName}
                             </strong>
-                            <span className="text-[10px] text-zinc-500 font-mono">
+                            <span className="text-[10px] text-slate-500 font-mono">
                               ({item.createdAt})
                             </span>
                           </div>
@@ -681,7 +678,7 @@ export default function AdminPage() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs text-amber-400/90 underline hover:text-amber-200 block truncate max-w-md"
+                            className="text-xs text-[#1E3E62] underline hover:text-[#0B192C] block truncate max-w-md font-medium"
                           >
                             {item.url}
                           </a>
@@ -690,16 +687,16 @@ export default function AdminPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => copyToClipboard(item.url, `url_${item.id}`)}
-                            className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-amber-500/30 text-xs text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 transition-all cursor-pointer flex items-center gap-1.5 font-medium"
+                            className="px-3 py-1.5 rounded-lg bg-white border border-[#0B192C]/20 text-xs text-[#1E3E62] hover:bg-[#1E3E62]/10 hover:border-[#162443] transition-all cursor-pointer flex items-center gap-1.5 font-medium"
                           >
                             {copiedIndex === `url_${item.id}` ? (
                               <>
-                                <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
-                                <span className="text-green-400">Tersalin</span>
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                                <span className="text-emerald-600 font-semibold">Tersalin</span>
                               </>
                             ) : (
                               <>
-                                <Copy className="w-3.5 h-3.5 text-amber-400" />
+                                <Copy className="w-3.5 h-3.5 text-[#1E3E62]" />
                                 <span>Salin Link</span>
                               </>
                             )}
@@ -709,15 +706,15 @@ export default function AdminPage() {
                             href={waUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-3.5 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-xs text-emerald-300 hover:bg-emerald-900 transition-all cursor-pointer flex items-center gap-1.5 font-bold shadow-md"
+                            className="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-all cursor-pointer flex items-center gap-1.5 font-bold shadow-sm"
                           >
-                            <Send className="w-3.5 h-3.5 text-emerald-400" />
+                            <Send className="w-3.5 h-3.5 text-white" />
                             <span>Kirim WA</span>
                           </a>
 
                           <button
                             onClick={() => deleteSavedLink(item.id)}
-                            className="p-1.5 rounded-lg bg-zinc-900 text-zinc-500 hover:text-red-400 hover:bg-red-950/50 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg bg-white text-slate-400 hover:text-rose-600 hover:bg-rose-50 border border-[#0B192C]/10 transition-colors cursor-pointer"
                             title="Hapus"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -737,56 +734,56 @@ export default function AdminPage() {
           <div className="space-y-6 animate-fade-in-up">
             {/* Stat Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl glass-card border border-amber-500/30 space-y-1 shadow-lg">
-                <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">
+              <div className="p-5 rounded-2xl glass-card border border-[#0B192C]/15 space-y-1 shadow-md">
+                <span className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">
                   Total Respon RSVP
                 </span>
-                <div className="text-3xl font-bold gold-gradient-text">{rsvps.length}</div>
-                <span className="text-xs text-zinc-400 font-light">Konfirmasi Masuk</span>
+                <div className="text-3xl font-bold navy-gradient-text">{rsvps.length}</div>
+                <span className="text-xs text-slate-600 font-light">Konfirmasi Masuk</span>
               </div>
 
-              <div className="p-5 rounded-2xl glass-card border border-emerald-500/30 space-y-1 shadow-lg bg-emerald-950/10">
-                <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="p-5 rounded-2xl glass-card border border-emerald-300/60 bg-emerald-50/50 space-y-1 shadow-md">
+                <span className="text-[10px] uppercase tracking-widest text-emerald-800 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                   Total Tamu Hadir
                 </span>
-                <div className="text-3xl font-bold text-emerald-300">
-                  {totalHadirCount} <span className="text-xs font-normal text-emerald-400/80">Orang</span>
+                <div className="text-3xl font-bold text-emerald-900">
+                  {totalHadirCount} <span className="text-xs font-normal text-emerald-700">Orang</span>
                 </div>
-                <span className="text-xs text-emerald-400/70 font-light">
+                <span className="text-xs text-emerald-700 font-light">
                   Dari {totalRespondentsHadir} Pengonfirmasi Hadir
                 </span>
               </div>
 
-              <div className="p-5 rounded-2xl glass-card border border-amber-700/30 space-y-1 shadow-lg bg-red-950/10">
-                <span className="text-[10px] uppercase tracking-widest text-red-400 font-semibold flex items-center gap-1.5">
-                  <XCircle className="w-3.5 h-3.5 text-red-400" />
+              <div className="p-5 rounded-2xl glass-card border border-rose-300/60 bg-rose-50/50 space-y-1 shadow-md">
+                <span className="text-[10px] uppercase tracking-widest text-rose-800 font-semibold flex items-center gap-1.5">
+                  <XCircle className="w-3.5 h-3.5 text-rose-600" />
                   Tidak Bisa Hadir
                 </span>
-                <div className="text-3xl font-bold text-red-300">{totalRespondentsTidakHadir}</div>
-                <span className="text-xs text-red-400/70 font-light">Tamu Menyerahkan Halangan</span>
+                <div className="text-3xl font-bold text-rose-900">{totalRespondentsTidakHadir}</div>
+                <span className="text-xs text-rose-700 font-light">Tamu Menyerahkan Halangan</span>
               </div>
             </div>
 
             {/* Filter & Table Container */}
-            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-amber-500/30 shadow-2xl space-y-6">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-[#0B192C]/15 shadow-xl space-y-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#0B192C]/10 pb-4">
                 <div className="flex items-center gap-3 w-full sm:w-auto">
                   <div className="relative flex-1 sm:w-64">
-                    <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       value={rsvpSearch}
                       onChange={(e) => setRsvpSearch(e.target.value)}
                       placeholder="Cari nama tamu..."
-                      className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-950 border border-amber-500/30 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
+                      className="w-full pl-9 pr-4 py-2 rounded-xl bg-white border border-[#0B192C]/20 text-xs text-[#0B192C] placeholder-slate-400 focus:outline-none focus:border-[#162443]"
                     />
                   </div>
 
                   <select
                     value={rsvpFilter}
                     onChange={(e) => setRsvpFilter(e.target.value as 'all' | 'hadir' | 'tidak_hadir')}
-                    className="px-3 py-2 rounded-xl bg-zinc-950 border border-amber-500/30 text-xs text-amber-200 focus:outline-none focus:border-amber-400 cursor-pointer"
+                    className="px-3 py-2 rounded-xl bg-white border border-[#0B192C]/20 text-xs text-[#0B192C] focus:outline-none focus:border-[#162443] cursor-pointer"
                   >
                     <option value="all">Semua Status</option>
                     <option value="hadir">Hadir Sahaja</option>
@@ -798,7 +795,7 @@ export default function AdminPage() {
                   <button
                     onClick={fetchRsvps}
                     disabled={isLoadingRsvp}
-                    className="p-2.5 rounded-xl bg-zinc-900 border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 transition-colors cursor-pointer"
+                    className="p-2.5 rounded-xl bg-white border border-[#0B192C]/20 text-[#1E3E62] hover:bg-[#1E3E62]/10 transition-colors cursor-pointer shadow-sm"
                     title="Refresh Data"
                   >
                     <RefreshCw className={`w-4 h-4 ${isLoadingRsvp ? 'animate-spin' : ''}`} />
@@ -806,7 +803,7 @@ export default function AdminPage() {
 
                   <button
                     onClick={exportRsvpCsv}
-                    className="px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-400/40 text-xs font-semibold text-amber-300 hover:bg-amber-400 hover:text-zinc-950 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-xl shimmer-button text-[#FAF7F2] text-xs font-semibold shadow-md cursor-pointer flex items-center gap-1.5"
                   >
                     <Download className="w-4 h-4" />
                     <span>Export CSV</span>
@@ -818,7 +815,7 @@ export default function AdminPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="border-b border-amber-500/25 text-amber-300 uppercase tracking-wider">
+                    <tr className="border-b border-[#0B192C]/15 text-[#1E3E62] uppercase tracking-wider">
                       <th className="py-3 px-4 font-semibold">Nama Tamu</th>
                       <th className="py-3 px-4 font-semibold">Status</th>
                       <th className="py-3 px-4 font-semibold text-center">Jumlah Tamu</th>
@@ -827,37 +824,37 @@ export default function AdminPage() {
                       <th className="py-3 px-4 font-semibold text-center">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-amber-500/15">
+                  <tbody className="divide-y divide-[#0B192C]/10">
                     {filteredRsvps.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="py-8 text-center text-zinc-500 italic">
+                        <td colSpan={6} className="py-8 text-center text-slate-500 italic">
                           Belum ada data konfirmasi RSVP yang cocok.
                         </td>
                       </tr>
                     ) : (
                       filteredRsvps.map((item) => (
-                        <tr key={item.id} className="hover:bg-amber-500/5 transition-colors">
-                          <td className="py-4 px-4 font-semibold text-amber-100">{item.name}</td>
+                        <tr key={item.id} className="hover:bg-[#1E3E62]/5 transition-colors">
+                          <td className="py-4 px-4 font-semibold text-[#0B192C]">{item.name}</td>
                           <td className="py-4 px-4">
                             {item.attendance === 'hadir' ? (
-                              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
-                                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
+                                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                                 Hadir
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-950/80 border border-red-500/40 text-red-300 text-[10px] font-bold uppercase tracking-wider">
-                                <XCircle className="w-3 h-3 text-red-400" />
+                              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-rose-100 border border-rose-300 text-rose-800 text-[10px] font-bold uppercase tracking-wider">
+                                <XCircle className="w-3 h-3 text-rose-600" />
                                 Tidak Hadir
                               </span>
                             )}
                           </td>
-                          <td className="py-4 px-4 text-center font-bold text-amber-300">
+                          <td className="py-4 px-4 text-center font-bold text-[#162443]">
                             {item.attendance === 'hadir' ? `${item.guest_count} Orang` : '-'}
                           </td>
-                          <td className="py-4 px-4 text-zinc-300 font-light max-w-xs truncate">
-                            {item.notes || <span className="text-zinc-600 italic">- Tidak ada -</span>}
+                          <td className="py-4 px-4 text-slate-700 font-light max-w-xs truncate">
+                            {item.notes || <span className="text-slate-400 italic">- Tidak ada -</span>}
                           </td>
-                          <td className="py-4 px-4 text-right text-zinc-400 font-mono text-[11px]">
+                          <td className="py-4 px-4 text-right text-slate-500 font-mono text-[11px]">
                             {new Date(item.created_at).toLocaleDateString('id-ID', {
                               day: 'numeric',
                               month: 'short',
@@ -868,7 +865,7 @@ export default function AdminPage() {
                           <td className="py-4 px-4 text-center">
                             <button
                               onClick={() => handleDeleteRsvp(item.id)}
-                              className="p-1.5 rounded-lg bg-zinc-900 text-zinc-500 hover:text-red-400 hover:bg-red-950/50 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg bg-white text-slate-400 hover:text-rose-600 hover:bg-rose-50 border border-[#0B192C]/10 transition-colors cursor-pointer"
                               title="Hapus Data RSVP"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -889,49 +886,49 @@ export default function AdminPage() {
           <div className="space-y-6 animate-fade-in-up">
             {/* Stat Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl glass-card border border-amber-500/30 space-y-1 shadow-lg">
-                <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">
+              <div className="p-5 rounded-2xl glass-card border border-[#0B192C]/15 space-y-1 shadow-md">
+                <span className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">
                   Total Ucapan Terkirim
                 </span>
-                <div className="text-3xl font-bold gold-gradient-text">{wishes.length}</div>
-                <span className="text-xs text-zinc-400 font-light">Doa &amp; Restu Tamu Undangan</span>
+                <div className="text-3xl font-bold navy-gradient-text">{wishes.length}</div>
+                <span className="text-xs text-slate-600 font-light">Doa &amp; Restu Tamu Undangan</span>
               </div>
 
-              <div className="p-5 rounded-2xl glass-card border border-amber-500/30 flex items-center justify-between shadow-lg">
+              <div className="p-5 rounded-2xl glass-card border border-[#0B192C]/15 flex items-center justify-between shadow-md">
                 <div>
-                  <span className="text-[10px] uppercase tracking-widest text-amber-400 font-semibold block">
+                  <span className="text-[10px] uppercase tracking-widest text-[#1E3E62] font-semibold block">
                     Unduh Data Ucapan
                   </span>
-                  <p className="text-xs text-zinc-400 mt-1">Simpan ucapan tamu ke format CSV Excel.</p>
+                  <p className="text-xs text-slate-600 mt-1">Simpan ucapan tamu ke format CSV Excel.</p>
                 </div>
                 <button
                   onClick={exportWishesCsv}
-                  className="px-4 py-2.5 rounded-xl shimmer-button text-zinc-950 font-extrabold text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl shimmer-button text-[#FAF7F2] font-extrabold text-xs uppercase tracking-wider shadow-md flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Download className="w-4 h-4 text-zinc-950" />
+                  <Download className="w-4 h-4 text-[#FAF7F2]" />
                   <span>Export</span>
                 </button>
               </div>
             </div>
 
             {/* Filter & Wishes List Container */}
-            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-amber-500/30 shadow-2xl space-y-6">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-[#0B192C]/15 shadow-xl space-y-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#0B192C]/10 pb-4">
                 <div className="relative flex-1 w-full sm:w-64">
-                  <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={wishSearch}
                     onChange={(e) => setWishSearch(e.target.value)}
                     placeholder="Cari kata atau nama..."
-                    className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-950 border border-amber-500/30 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
+                    className="w-full pl-9 pr-4 py-2 rounded-xl bg-white border border-[#0B192C]/20 text-xs text-[#0B192C] placeholder-slate-400 focus:outline-none focus:border-[#162443]"
                   />
                 </div>
 
                 <button
                   onClick={fetchWishes}
                   disabled={isLoadingWishes}
-                  className="p-2.5 rounded-xl bg-zinc-900 border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 transition-colors cursor-pointer self-end sm:self-auto"
+                  className="p-2.5 rounded-xl bg-white border border-[#0B192C]/20 text-[#1E3E62] hover:bg-[#1E3E62]/10 transition-colors cursor-pointer self-end sm:self-auto shadow-sm"
                   title="Refresh Data"
                 >
                   <RefreshCw className={`w-4 h-4 ${isLoadingWishes ? 'animate-spin' : ''}`} />
@@ -941,26 +938,26 @@ export default function AdminPage() {
               {/* Wishes Table / List */}
               <div className="space-y-3">
                 {filteredWishes.length === 0 ? (
-                  <div className="py-10 text-center text-zinc-500 text-xs italic">
+                  <div className="py-10 text-center text-slate-500 text-xs italic">
                     Belum ada ucapan yang cocok dengan kata pencarian.
                   </div>
                 ) : (
                   filteredWishes.map((item) => (
                     <div
                       key={item.id}
-                      className="p-4 sm:p-5 rounded-2xl bg-zinc-950/80 border border-amber-500/20 space-y-2 hover:border-amber-400/50 transition-colors shadow-md"
+                      className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#0B192C]/15 space-y-2 hover:border-[#162443]/40 transition-colors shadow-sm"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <strong className="text-sm font-semibold text-amber-100">{item.name}</strong>
+                          <strong className="text-sm font-semibold text-[#0B192C]">{item.name}</strong>
                           {item.relation && (
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#1E3E62]/10 border border-[#1E3E62]/20 text-[#1E3E62] font-medium">
                               {item.relation}
                             </span>
                           )}
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="text-[10px] text-zinc-500 font-mono">
+                          <span className="text-[10px] text-slate-500 font-mono">
                             {new Date(item.created_at).toLocaleDateString('id-ID', {
                               day: 'numeric',
                               month: 'short',
@@ -970,14 +967,14 @@ export default function AdminPage() {
                           </span>
                           <button
                             onClick={() => handleDeleteWish(item.id)}
-                            className="p-1 rounded-lg bg-zinc-900 text-zinc-500 hover:text-red-400 hover:bg-red-950/50 transition-colors cursor-pointer"
+                            className="p-1 rounded-lg bg-white text-slate-400 hover:text-rose-600 hover:bg-rose-50 border border-[#0B192C]/10 transition-colors cursor-pointer"
                             title="Hapus Ucapan"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
-                      <p className="text-xs text-zinc-300 italic leading-relaxed font-light pt-1">
+                      <p className="text-xs text-slate-700 italic leading-relaxed font-light pt-1">
                         &ldquo;{item.message}&rdquo;
                       </p>
                     </div>
