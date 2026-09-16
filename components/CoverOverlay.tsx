@@ -31,7 +31,7 @@ export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, i
           alt="Background Bingkai Portrait"
           fill
           priority
-          className="object-cover object-center"
+          className="w-full h-full object-fill"
           sizes="100vw"
         />
       </div>
