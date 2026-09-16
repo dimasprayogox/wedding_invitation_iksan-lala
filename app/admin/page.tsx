@@ -128,12 +128,11 @@ export default function AdminPage() {
     e.preventDefault();
     setLoginError('');
 
-    const envUsername = (process.env.NEXT_PUBLIC_ADMIN_USERNAME || process.env.ADMIN_USERNAME || 'admin').trim();
-    const envPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || 'password').trim();
+    const envUsername = (process.env.NEXT_PUBLIC_ADMIN_USERNAME).trim();
+    const envPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD).trim();
 
     if (
-      (username.trim() === envUsername && password.trim() === envPassword) ||
-      (username.trim() === 'iksanlala' && password.trim() === 'wedding2026')
+      (username.trim() === envUsername && password.trim() === envPassword) 
     ) {
       setIsAuthenticated(true);
       sessionStorage.setItem('admin_logged_in', 'true');

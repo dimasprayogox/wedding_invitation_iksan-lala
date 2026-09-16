@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
-import { FloralDivider } from '@/components/FloralDecorations';
+import {  FloralDivider } from '@/components/FloralDecorations';
 
 export const Gallery: React.FC = () => {
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
