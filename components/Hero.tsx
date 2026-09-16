@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] overflow-hidden">
       {/* Top-Left Bunga Ornament */}
-      <div className="absolute -top-20 -left-1 sm:-top-10 sm:-left-10 w-[240px] sm:w-[420px] md:w-[500px] pointer-events-none z-0 hero-stagger-flower">
+      <div className="absolute -top-20 -left-1 sm:-top-10 sm:-left-10 w-[240px] sm:w-[420px] md:w-[500px] pointer-events-none z-30 hero-stagger-flower">
   <Image
     src="/bunga.webp"
     alt="Ornamen Bunga Kiri Atas"
@@ -22,7 +22,7 @@ export const Hero: React.FC = () => {
 </div>
 
       {/* Bottom-Right Bunga Ornament */}
-     <div className="absolute bottom-0 right-19 sm:-bottom-4 sm:-right-10 w-[240px] sm:w-[420px] md:w-[500px] pointer-events-none z-0 hero-stagger-flower" style={{ animationDelay: '0.3s' }}>
+     <div className="absolute bottom-0 right-19 sm:-bottom-4 sm:-right-10 w-[240px] sm:w-[420px] md:w-[500px] pointer-events-none z-30 hero-stagger-flower" style={{ animationDelay: '0.3s' }}>
   <Image
     src="/bunga.webp"
     alt="Ornamen Bunga Kanan Bawah"

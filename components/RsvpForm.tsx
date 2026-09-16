@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { CheckCircle2, UserCheck, Users, MessageSquare, Send, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { FloralBackgroundGeometric, FloralDivider } from '@/components/FloralDecorations';
+import { FloralDivider } from '@/components/FloralDecorations';
 
 interface RsvpFormProps {
   initialName?: string;
@@ -67,8 +67,6 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ initialName = '' }) => {
 
   return (
     <section id="rsvp" className="py-24 px-6 bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] text-[#162443] relative border-t border-[#162443]/10 overflow-hidden">
-      {/* Background Floral Ornaments */}
-      <FloralBackgroundGeometric />
 
       <div className="max-w-3xl mx-auto space-y-12 relative z-10">
         <div className="text-center space-y-3">

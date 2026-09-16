@@ -5,7 +5,7 @@ import { MessageCircle, Send, User, Loader2 } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
 import { GuestWish } from '@/types/wedding';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
-import { FloralBackgroundBotanical, FloralDivider } from '@/components/FloralDecorations';
+import { FloralDivider } from '@/components/FloralDecorations';
 
 interface GuestWishesProps {
   initialGuestName?: string;
@@ -127,8 +127,6 @@ export const GuestWishes: React.FC<GuestWishesProps> = ({ initialGuestName = '' 
 
   return (
     <section id="wishes" className="py-24 px-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
-      {/* Background Floral Ornaments */}
-      <FloralBackgroundBotanical />
 
       <div className="max-w-4xl mx-auto space-y-12 relative z-10">
         <div className="text-center space-y-3">

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Gift, CreditCard, Copy, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { WEDDING_DATA } from '@/data/weddingData';
-import { FloralBackgroundMeadow, FloralDivider } from '@/components/FloralDecorations';
+import { FloralDivider } from '@/components/FloralDecorations';
 
 export const WeddingGift: React.FC = () => {
   const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
@@ -27,8 +27,6 @@ export const WeddingGift: React.FC = () => {
 
   return (
     <section id="gift" className="py-24 px-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
-      {/* Background Floral Ornaments */}
-      <FloralBackgroundMeadow />
 
       <div className="max-w-4xl mx-auto space-y-12 relative z-10">
         <div className="text-center space-y-3">

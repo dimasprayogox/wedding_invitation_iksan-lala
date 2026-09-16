@@ -4,13 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import { Camera } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
-import { FloralDivider, FloralBackgroundBotanical } from '@/components/FloralDecorations';
+import { FloralDivider } from '@/components/FloralDecorations';
 
 export const CoupleProfile: React.FC = () => {
   return (
     <section id="couple" className="py-24 px-6 bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] text-[#0B192C] relative overflow-hidden border-t border-[#0B192C]/10">
       {/* Background Floral Ornaments */}
-      <FloralBackgroundBotanical />
+    
       {/* Background illumination */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#1E3E62]/5 rounded-full blur-3xl pointer-events-none" />
 

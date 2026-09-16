@@ -3,15 +3,13 @@
 import React from 'react';
 import { Navigation } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
-import { FloralBackgroundGeometric, FloralDivider } from '@/components/FloralDecorations';
+import { FloralDivider } from '@/components/FloralDecorations';
 
 export const MapsLocation: React.FC = () => {
   const { resepsi } = WEDDING_DATA.events;
 
   return (
     <section id="location" className="py-24 px-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] relative border-t border-[#0B192C]/10 overflow-hidden">
-      {/* Background Floral Ornaments */}
-      <FloralBackgroundGeometric />
 
       <div className="max-w-5xl mx-auto space-y-10 relative z-10">
         <div className="text-center space-y-3">

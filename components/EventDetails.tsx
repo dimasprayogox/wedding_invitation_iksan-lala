@@ -3,15 +3,13 @@
 import React from 'react';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
-import { FloralBackgroundLaurel, FloralDivider } from '@/components/FloralDecorations';
+import { FloralDivider } from '@/components/FloralDecorations';
 
 export const EventDetails: React.FC = () => {
   const { akad, resepsi } = WEDDING_DATA.events;
 
   return (
     <section id="event" className="py-24 px-6 bg-gradient-to-b from-[#E7EFF5] via-[#f9fdff] to-[#F2F7FA] text-[#0B192C] relative overflow-hidden border-t border-[#0B192C]/10">
-      {/* Background Floral Ornaments */}
-      <FloralBackgroundLaurel />
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-16 space-y-3">
           <span className="text-xs uppercase tracking-[0.25em] text-[#1E3E62] font-semibold">
