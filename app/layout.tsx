@@ -23,10 +23,18 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "The Wedding of Ikhsan & Lala | Undangan Pernikahan Digital",
   description: "Undangan Pernikahan Digital Ikhsan & Lala. Jumat, 2 Oktober 2026.",
+  icons: {
+    icon: [
+      { url: "/logo.webp", type: "image/webp" },
+    ],
+    shortcut: "/logo.webp",
+    apple: "/logo.webp",
+  },
   openGraph: {
     title: "The Wedding of Ikhsan & Lala",
     description: "Kami Mengundang Anda Untuk Hadir Di Acara Pernikahan Kami",
     type: "website",
+    images: ["/logo.webp"],
   },
 };
 
