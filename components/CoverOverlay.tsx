@@ -1,18 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
-import { MailOpen, Heart, Sparkles } from 'lucide-react';
+import { MailOpen, Heart, Sparkles, Loader2 } from 'lucide-react';
 import { WEDDING_DATA } from '@/data/weddingData';
 import { MonogramHeader } from '@/components/FloralDecorations';
+import { preloadHeroAssets } from '@/lib/preload';
 
 interface CoverOverlayProps {
   guestName: string;
   isOpen: boolean;
+  isLoading?: boolean;
   onOpen: () => void;
 }
 
-export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, onOpen }) => {
+export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, isLoading = false, onOpen }) => {
+  useEffect(() => {
+    // Quietly preload hero assets in background without blocking cover
+    preloadHeroAssets().catch(() => {});
+  }, []);
+
   if (isOpen) return null;
 
   return (
@@ -79,11 +86,21 @@ export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, o
         {/* Open Button */}
         <button
           onClick={onOpen}
-          className="mt-4 group inline-flex items-center gap-3 px-9 py-3.5 rounded-full shimmer-button text-[#FAF7F2] font-extrabold shadow-xl shadow-[#0B192C]/20 hover:scale-105 transition-all duration-300 cursor-pointer"
+          disabled={isLoading}
+          className="mt-4 group inline-flex items-center gap-3 px-9 py-3.5 rounded-full shimmer-button text-[#FAF7F2] font-extrabold shadow-xl shadow-[#0B192C]/20 hover:scale-105 transition-all duration-300 cursor-pointer disabled:opacity-80 disabled:scale-100 disabled:cursor-wait"
         >
-          <MailOpen className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 text-[#FAF7F2]" />
-          <span className="tracking-wider uppercase text-xs sm:text-sm font-bold">Buka Undangan</span>
-          <Sparkles className="w-4 h-4 text-[#FAF7F2] animate-spin-slow" />
+          {isLoading ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin text-[#FAF7F2]" />
+              <span className="tracking-wider uppercase text-xs sm:text-sm font-bold">Menyiapkan...</span>
+            </>
+          ) : (
+            <>
+              <MailOpen className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 text-[#FAF7F2]" />
+              <span className="tracking-wider uppercase text-xs sm:text-sm font-bold">Buka Undangan</span>
+              <Sparkles className="w-4 h-4 text-[#FAF7F2] animate-spin-slow" />
+            </>
+          )}
         </button>
 
         {/* Decorative Bottom Note */}

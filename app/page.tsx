@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, Suspense } from 'react';
+import React, { useState, useRef, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CoverOverlay } from '@/components/CoverOverlay';
+import { LoadingScreen } from '@/components/LoadingScreen';
 import { Hero } from '@/components/Hero';
 import { CoupleProfile } from '@/components/CoupleProfile';
 import { Countdown } from '@/components/Countdown';
@@ -17,17 +18,50 @@ import { BottomNav } from '@/components/BottomNav';
 import { FallingPetals } from '@/components/FallingPetals';
 import { FloralDivider } from '@/components/FloralDecorations';
 import { WEDDING_DATA } from '@/data/weddingData';
+import { prepareMainContentAssets } from '@/lib/preload';
 
 function MainInvitationContent() {
   const searchParams = useSearchParams();
   const guestName = searchParams.get('to') || searchParams.get('tamu') || searchParams.get('name') || '';
 
   const [isOpenCover, setIsOpenCover] = useState(false);
+  const [isLoadingMain, setIsLoadingMain] = useState(false);
+  const [isFadingOutLoading, setIsFadingOutLoading] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
 
-  const handleOpenInvitation = () => {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleOpenInvitation = async () => {
+    if (isLoadingMain || isOpenCover) return;
+
+    setIsLoadingMain(true);
+
+    try {
+      // Preload initial viewport (Hero) assets & fonts with safety fallback timeout
+      await prepareMainContentAssets(2500, 700);
+    } catch {
+      // Ignore errors and proceed to reveal content
+    }
+
+    // Reveal main content and fade out loading screen
     setIsOpenCover(true);
+    setIsFadingOutLoading(true);
+
+    // Play music after click and main content preparation
     setIsPlayingMusic(true);
+
+    timeoutRef.current = setTimeout(() => {
+      setIsLoadingMain(false);
+      setIsFadingOutLoading(false);
+    }, 700);
   };
 
   return (
@@ -36,7 +70,14 @@ function MainInvitationContent() {
       <CoverOverlay
         guestName={guestName}
         isOpen={isOpenCover}
+        isLoading={isLoadingMain}
         onOpen={handleOpenInvitation}
+      />
+
+      {/* Loading & Transition Screen */}
+      <LoadingScreen
+        isVisible={isLoadingMain}
+        isFadingOut={isFadingOutLoading}
       />
 
       {/* Falling Flower Petals Background */}
