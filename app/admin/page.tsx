@@ -128,8 +128,8 @@ export default function AdminPage() {
     e.preventDefault();
     setLoginError('');
 
-    const envUsername = (process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin').trim();
-    const envPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'password').trim();
+    const envUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME?.trim();
+    const envPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD?.trim();
 
     if (
       (username.trim() === envUsername && password.trim() === envPassword) 
