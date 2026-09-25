@@ -78,13 +78,18 @@ export default function AdminPage() {
   // Base URL
   const [baseUrl, setBaseUrl] = useState('');
 
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setBaseUrl(window.location.origin);
-      const authSession = sessionStorage.getItem('admin_logged_in');
-      if (authSession === 'true') {
-        setIsAuthenticated(true);
-      }
+
+      // Check session via server
+      fetch('/api/auth')
+        .then((r) => {
+          if (r.ok) setIsAuthenticated(true);
+        })
+        .finally(() => setIsCheckingAuth(false));
 
       // Load saved guest links from localStorage
       const localLinks = localStorage.getItem('saved_guest_links');
@@ -123,27 +128,37 @@ export default function AdminPage() {
     }
   };
 
-  // Auth Handler using process.env credentials
-  const handleLogin = (e: React.FormEvent) => {
+  // Auth Handler via server API
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
+    setIsLoggingIn(true);
 
-    const envUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME?.trim();
-    const envPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD?.trim();
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username.trim(), password: password.trim() }),
+      });
 
-    if (
-      (username.trim() === envUsername && password.trim() === envPassword) 
-    ) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('admin_logged_in', 'true');
-    } else {
-      setLoginError('Username atau Password salah!');
+      if (res.ok) {
+        setIsAuthenticated(true);
+      } else {
+        const data = await res.json();
+        setLoginError(data.error || 'Username atau Password salah!');
+      }
+    } catch {
+      setLoginError('Gagal menghubungi server.');
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await fetch('/api/auth', { method: 'DELETE' });
     setIsAuthenticated(false);
-    sessionStorage.removeItem('admin_logged_in');
   };
 
   // Fetch Data Functions
@@ -412,6 +427,14 @@ export default function AdminPage() {
 
   // LOGIN SCREEN (Matching Landing Page Palette)
   if (!isAuthenticated) {
+    if (isCheckingAuth) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5]">
+          <RefreshCw className="w-6 h-6 animate-spin text-[#1E3E62]" />
+        </div>
+      );
+    }
+
     return (
       <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-b from-[#F2F7FA] via-[#f9fdff] to-[#E7EFF5] text-[#0B192C] relative overflow-hidden">
         {/* Background Glow */}
@@ -464,10 +487,15 @@ export default function AdminPage() {
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-full shimmer-button text-[#FAF7F2] font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-[#0B192C]/20 hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2 mt-2"
+              disabled={isLoggingIn}
+              className="w-full py-3.5 rounded-full shimmer-button text-[#FAF7F2] font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-[#0B192C]/20 hover:scale-[1.02] transition-all cursor-pointer flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <Lock className="w-4 h-4 text-[#FAF7F2]" />
-              <span>Masuk Dashboard</span>
+              {isLoggingIn ? (
+                <RefreshCw className="w-4 h-4 text-[#FAF7F2] animate-spin" />
+              ) : (
+                <Lock className="w-4 h-4 text-[#FAF7F2]" />
+              )}
+              <span>{isLoggingIn ? 'Memproses...' : 'Masuk Dashboard'}</span>
             </button>
           </form>
         </div>
