@@ -39,6 +39,11 @@ html, body {
   background: #344a70;
 }
 
+/* GPU acceleration helpers */
+.will-change-transform {
+  will-change: transform;
+}
+
 /* Refined Navy & Ice Blue Gradients */
 .gold-gradient-text,
 .navy-gradient-text {
@@ -57,18 +62,19 @@ html, body {
   border-image: linear-gradient(135deg, rgba(22, 36, 67, 0.35), rgba(78, 106, 145, 0.2), rgba(22, 36, 67, 0.35)) 1;
 }
 
+/* Lightweight Glass Card with GPU layer optimization */
 .glass-card {
-  background: rgba(242, 247, 250, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(242, 247, 250, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(22, 36, 67, 0.12);
-  box-shadow: 0 10px 30px -10px rgba(22, 36, 67, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px -5px rgba(22, 36, 67, 0.06);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
   border-color: rgba(78, 106, 145, 0.3);
-  box-shadow: 0 12px 35px -5px rgba(22, 36, 67, 0.12);
+  box-shadow: 0 8px 25px -5px rgba(22, 36, 67, 0.1);
 }
 
 /* Metallic Navy Shimmer Button */
@@ -77,24 +83,23 @@ html, body {
   background-size: 200% 100%;
   animation: shimmer 4s infinite linear;
   color: #ffffff;
+  will-change: background-position;
 }
 
-/* Keyframe Animations */
+/* Keyframe Animations optimized with 3D GPU transforms */
 @keyframes petalFall {
   0% {
-    top: -10%;
-    transform: translateX(0px) rotate(0deg) scale(0.8);
+    transform: translate3d(0, -10vh, 0) rotate(0deg) scale(0.8);
     opacity: 0;
   }
-  10% {
-    opacity: 0.9;
+  15% {
+    opacity: 0.8;
   }
-  90% {
-    opacity: 0.9;
+  85% {
+    opacity: 0.8;
   }
   100% {
-    top: 110%;
-    transform: translateX(120px) rotate(360deg) scale(1.1);
+    transform: translate3d(80px, 105vh, 0) rotate(360deg) scale(1);
     opacity: 0;
   }
 }
@@ -102,29 +107,20 @@ html, body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate3d(0, 20px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(22, 36, 67, 0.15);
-  }
-  50% {
-    box-shadow: 0 0 45px rgba(22, 36, 67, 0.35);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes floatSlow {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px) rotate(1.5deg);
+    transform: translate3d(0, -6px, 0) rotate(1deg);
   }
 }
 
@@ -139,45 +135,39 @@ html, body {
 
 .animate-petal-fall {
   animation: petalFall linear infinite;
+  will-change: transform;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }
 
 .animate-float {
   animation: floatSlow 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s infinite;
+  will-change: transform;
 }
 
 /* Bird bobbing animation */
 @keyframes birdBob {
   0%, 100% {
-    transform: translateY(0px) translateX(0px) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-8px) translateX(3px) rotate(2deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translateY(-4px) translateX(-2px) rotate(-1deg);
-  }
-  75% {
-    transform: translateY(-10px) translateX(2px) rotate(1.5deg);
+    transform: translate3d(0, -5px, 0) rotate(1deg);
   }
 }
 
 .animate-bird {
   animation: birdBob 4s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* Stagger entrance animations for Hero */
+/* Stagger entrance animations for Hero using GPU translate3d */
 @keyframes heroSlideIn {
   from {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
@@ -188,22 +178,22 @@ html, body {
 @keyframes heroFadeUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translate3d(0, 30px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes heroFadeScale {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(20px);
+    transform: scale(0.92) translate3d(0, 15px, 0);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1) translate3d(0, 0, 0);
   }
 }
 
@@ -211,29 +201,31 @@ html, body {
   opacity: 0;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .hero-stagger-flower {
   opacity: 0;
-  animation: heroSlideIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }
 
 .hero-stagger-1 {
-  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
 .hero-stagger-2 {
-  animation: heroFadeScale 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  animation: heroFadeScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
 
 .hero-stagger-3 {
-  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
 }
 
 .hero-stagger-4 {
-  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
 }
 
 .hero-stagger-5 {
-  animation: heroFadeScale 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+  animation: heroFadeScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
 }

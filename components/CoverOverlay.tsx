@@ -74,7 +74,7 @@ export const CoverOverlay: React.FC<CoverOverlayProps> = ({ guestName, isOpen, i
             Kepada Yth. Bapak/Ibu/Saudara/i
           </div>
           <h2 className="text-2xl sm:text-3xl font-semibold text-[#0B192C] mt-2 capitalize font-serif-custom py-1">
-            {guestName || 'Tamu Undangan Satu Dua Tiga'}
+            {guestName || 'Tamu Undangan'}
           </h2>
         </div>
 
