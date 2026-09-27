@@ -54,11 +54,9 @@ export const WEDDING_DATA = {
 
   gallery: [
     { id: 1, title: 'Prewedding Moment 1', url: '/1.webp' },
-    { id: 2, title: 'Prewedding Moment 2', url: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&q=80&w=800' },
+    { id: 2, title: 'Prewedding Moment 2', url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800' },
     { id: 3, title: 'Prewedding Moment 3', url: '/kursi.webp' },
-    { id: 4, title: 'Prewedding Moment 4', url: '/3.webp' },
-    { id: 5, title: 'Prewedding Moment 5', url: '/2.webp' },
-    { id: 6, title: 'Prewedding Moment 6', url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800' }
+    { id: 4, title: 'Prewedding Moment 4', url: '/3.webp' }
   ],
 
   bankAccounts: [
